@@ -19,15 +19,16 @@ def create(animal):
     today = now.strftime("%Y-%m-%d %H:%M:%S")
     blob = bucket.blob(today)
     blob.upload_from_filename('./savedimage.jpeg')
-    name=blob.public_url
-    print(name)
+    
+    blob.make_public()
+    print(blob.public_url)
   
     db.collection('USER1').add(
       {
         'name': animal,
         'location': 'Maniyur',
         'deviceid':'device1',
-        'imagepath':name,
+        'imagepath':blob.public_url,
         'time':today
         
       }
