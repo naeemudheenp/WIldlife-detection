@@ -33,9 +33,20 @@ import time
 import cv2
 import os
 import sys
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+from firebase import firebase
+from crud import create
+
 
 
 # construct the argument parse and parse the arguments
+identified=""
+x=0
+y=0
+w=0
+h=0
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--image", required=True,
 	help="path to input image")
@@ -46,7 +57,7 @@ ap.add_argument("-t", "--threshold", type=float, default=0.3,
 args = vars(ap.parse_args())
 
 # load the COCO class labels our YOLO model was trained on
-labelsPath = 'yolo-coco\\coco.names'
+labelsPath = os.path.join('yolo-coco', 'coco.names')
 LABELS = open(labelsPath).read().strip().split("\n")
 
 # initialize a list of colors to represent each possible class label
@@ -54,8 +65,8 @@ COLORS = np.random.randint(0, 255, size=(len(LABELS), 3),
 	dtype="uint8")
 
 # paths to the YOLO weights and model configuration
-weightsPath = 'yolo-coco\\yolov3.weights'
-configPath = 'yolo-coco\\yolov3.cfg'
+weightsPath = os.path.join('yolo-coco', 'yolov3.weights')
+configPath =  os.path.join('yolo-coco', 'yolov3.cfg')
 
 # load our YOLO object detector trained on COCO dataset (80 classes)
 net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
@@ -119,6 +130,10 @@ idxs = cv2.dnn.NMSBoxes(boxes, confidences, args["confidence"],
 
 # ensure at least one detection exists
 if len(idxs) > 0:
+	x=0
+	y=0
+	w=0
+	h=0
 	# loop over the indexes we are keeping
 	for i in idxs.flatten():
 		# extract the bounding box coordinates
@@ -129,10 +144,23 @@ if len(idxs) > 0:
 		color = [int(c) for c in COLORS[classIDs[i]]]
 		cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
 		text = "{}: {:.4f}".format(LABELS[classIDs[i]], confidences[i])
+		identified = LABELS[classIDs[i]]
 		cv2.putText(image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,
 			0.5, color, 2)
+			
+	
+
 
 # show the output image
-cv2.imshow("Image", image)
-cv2.waitKey(1000)
-sys.exit()
+if(identified!="book"):
+	print("identified")
+	crop_img = image[y:y+h, x:x+w]
+	
+	cv2.imwrite('savedimage.jpeg', crop_img) 
+	print(identified)
+	create(identified)
+	
+	identified=="book"
+	cv2.waitKey(60000)
+	
+

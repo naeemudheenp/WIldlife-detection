@@ -60,7 +60,7 @@ while True:
   
             # Save the frame
                 cv2.imwrite('camera.jpg', img)
-                os.system("python yolo.py -i camera.jpg")  
+                os.system("/usr/local/bin/python3 yolo.py -i camera.jpg")  
   
             # HERE we can reset the Countdown timer
             # if we want more Capture without closing
