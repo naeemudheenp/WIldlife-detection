@@ -152,7 +152,7 @@ if len(idxs) > 0:
 
 
 # show the output image
-if(identified!="book"):
+if(identified!="bookid"):
 	print("identified")
 	crop_img = image[y:y+h, x:x+w]
 	
