@@ -29,7 +29,8 @@ def create(animal):
         'location': 'Maniyur',
         'deviceid':'device1',
         'imagepath':blob.public_url,
-        'time':today
+        'time':today,
+        'ownerid':"1085"
         
       }
       
