@@ -1,51 +1,57 @@
-# Object Detection on images using YOLO
+# Wildlife Detection System using Arduino Uno and YOLO Algorithm
 
-**YOLO (You Only Look Once)** is a very powerful and a fast algorithm in object detection. A strong understanding of the algorithm is essential before we start to code.
+## Project Overview
 
-**Some important papers to start with -**
+This project aims to develop a wildlife detection system using an **Arduino Uno** integrated with the **WildialApp**. The system employs the **YOLO** algorithm for real-time wildlife detection through a camera module. Once wildlife is detected, the system triggers a warning to alert nearby individuals, helping in the protection and conservation of wildlife.
 
-There are three papers you need to go through *(Maybe difficult to understand initially, but worth reading it)*
+## Key Features
 
-- [You Only Look Once: Unified, Real-Time Object Detection](https://pjreddie.com/media/files/papers/yolo.pdf)
-- [YOLO9000: Better, Faster, Stronger](https://pjreddie.com/media/files/papers/YOLO9000.pdf)
-- [YOLOv3: An Incremental Improvement](https://pjreddie.com/media/files/papers/YOLOv3.pdf)
+- **Wildlife Detection**: Uses YOLO algorithm for accurate real-time detection of wildlife.
+- **Camera Integration**: Utilizes a camera module to capture images/videos for processing.
+- **Arduino Uno**: Acts as the main controller to manage input/output and communicate with the camera and detection module.
+- **Mobile App Integration**: Sends notifications and data to a mobile app (WildialApp) for remote monitoring.
 
-We are going to use YOLO v3 for our coding purpose in this repository.
+## Components Used
 
-*Before going to code, we need to download some important YOLO files. It's the folder that's present in this repository as yolo-coco*
+- **Arduino Uno**: The central processing unit of the system.
+- **Camera Module : For capturing live footage.
+- **YOLO Algorithm**: For object detection and wildlife identification.
+- **WildialApp**: A mobile application integrated with the system for alerts and real-time monitoring.
 
-The three files that needs to be downloaded are -
 
-- [coco.names](https://github.com/pjreddie/darknet/blob/master/data/coco.names)
-- [yolov3.cfg](https://github.com/pjreddie/darknet/blob/master/cfg/yolov3.cfg)
-- [yolov3.weights](https://pjreddie.com/media/files/yolov3.weights)
+## How it Works
 
-Download these files and save it inside a folder. Name the folder anything you wish, but I have named it as **yolo-coco** just because of the fact that we are going to use the coco dataset objects.
+1. The camera captures video feeds, which are processed using the YOLO algorithm to detect wildlife.
+2. The Arduino Uno handles communication between the camera module and the detection algorithm.
+3. Once wildlife is detected, an alert is sent to the **WildialApp**.
 
-Create a folder **images** and have some pictures inside it to test the object detection.
 
-The **yolo.py** has the script to detect the objects in the images.
+## Requirements
 
-Make sure you have numpy and opencv installed. If not install them using pip
+- **Arduino Uno** board
+- **Camera Module** 
+- **YOLO model** for object detection
+- **WildialApp** for mobile notification integration
 
-```
-pip install numpy
-pip install opencv-python
-```
 
-I am using the ***numpy*** version ***1.17.4*** and ***opencv*** version ***3.4.2***
+## Setup Instructions
 
-You can now run the file by giving this command on your command promt
+1. **Install Required Libraries**:
+   - Install the YOLO object detection model on your system.
+   - Install necessary Arduino libraries to control the camera module.
 
-```
-python yolo.py --image images/ipl.jpeg
-```
+2. **Connect Hardware**:
+   - Connect the camera module to the Arduino Uno.
 
-You can use any image you want after the `--image` argument. Make sure you give the right path.
 
-Press **q** to quit the window of the image showing object detection
+3. **Upload Code to Arduino**:
+   - Upload the provided Arduino code to your Arduino Uno.
 
-Feel free to star ⭐ this repo if you find this useful and visit my [YouTube](https://www.youtube.com/channel/UCaOiKrS-R1Nuya0pxjQ68fA) channel if you have time.
+4. **Run the YOLO Model**:
+   - Ensure the YOLO model is running and connected to the system for real-time detection.
 
-Thanks!
+5. **Mobile App Integration**:
+   - Follow the integration steps for the **WildialApp** to receive notifications.
+
+
 
